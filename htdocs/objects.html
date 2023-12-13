@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Оценка самолетов</title>
+    <style>
+        .airplane-container {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .rating-input {
+            width: 60px; /* Увеличьте или уменьшите, как вам нужно */
+        }
+
+        #submit-btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <meta charset="UTF-8">
+        <h1>Добро пожаловать на сайт о самолетах.</h1>
+        <link rel="stylesheet" href="style.css">
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about.html">Определение</a></li>
+                <li><a href="descriptions.html">Описание некоторых самолетов</a></li>
+                <li><a href="questions.html">Вопросы</a></li>
+                <li><a href="autorization.html">Отзывы</a></li>
+                <li><a href="objects.html" class="active-link">Список</a></li>
+                <a href="https://s1.1zoom.ru/prev/588/Fighter_Airplane_SU-57_Flight_Russian_587545_600x400.jpg" target="_blank" width = 600 length = 400>
+                    <img src="https://s1.1zoom.ru/prev/588/Fighter_Airplane_SU-57_Flight_Russian_587545_600x400.jpg" alt="Миниатюрная графическая гиперссылка" width = 100 length = 100>
+                </a>
+            </ul>
+        </nav>
+    </header>
+
+<div id="header-text">Здесь вы можете оценить картинки с самолетами</div>
+<div id="content-container"></div>
+<button id="submit-btn">Отправить оценки</button>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const contentContainer = document.getElementById("content-container");
+
+        // Данные о самолетах
+        const airplanesData = [
+            { imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/B-747_Iberia.jpg/548px-B-747_Iberia.jpg", id: 1 },
+            { imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/A6-EDY_A380_Emirates_31_jan_2013_jfk_%288442269364%29_%28cropped%29.jpg/548px-A6-EDY_A380_Emirates_31_jan_2013_jfk_%288442269364%29_%28cropped%29.jpg", id: 2 },
+            { imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/N247JB_KJFK_%2837103752403%29.jpg/548px-N247JB_KJFK_%2837103752403%29.jpg", id: 3 },
+            { imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Cathay_Pacific_Boeing_777-200%3B_B-HNL%40HKG.jpg/548px-Cathay_Pacific_Boeing_777-200%3B_B-HNL%40HKG.jpg", id: 4 },
+            { imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Airbus_A320-200_Airbus_Industries_%28AIB%29_%22House_colors%22_F-WWBA_-_MSN_001_%2810276181983%29.jpg/548px-Airbus_A320-200_Airbus_Industries_%28AIB%29_%22House_colors%22_F-WWBA_-_MSN_001_%2810276181983%29.jpg", id: 5 },
+            { imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/South_African_Airlink_Boeing_737-200_Advanced_Smith.jpg/548px-South_African_Airlink_Boeing_737-200_Advanced_Smith.jpg", id: 6 },
+            { imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/N247JB_KJFK_%2837103752403%29.jpg/548px-N247JB_KJFK_%2837103752403%29.jpg", id: 7 },
+            { imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/B-747_Iberia.jpg/548px-B-747_Iberia.jpg", id: 8 },
+            { imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/A6-EDY_A380_Emirates_31_jan_2013_jfk_%288442269364%29_%28cropped%29.jpg/548px-A6-EDY_A380_Emirates_31_jan_2013_jfk_%288442269364%29_%28cropped%29.jpg", id: 9 },
+        ];
+
+        // Генерация контента для каждого самолета
+        airplanesData.forEach((airplane) => {
+            const airplaneContainer = document.createElement("div");
+            airplaneContainer.classList.add("airplane-container");
+
+            const imageElement = document.createElement("img");
+            imageElement.src = airplane.imageUrl;
+            imageElement.alt = `Airplane ${airplane.id}`;
+            imageElement.style.width = "200px"; // Установите размер изображения по вашему усмотрению
+
+            const ratingInput = document.createElement("input");
+            ratingInput.type = "number";
+            ratingInput.min = 1;
+            ratingInput.max = 10;
+            ratingInput.value = 5; // Устанавливаем значение по умолчанию в 5
+            ratingInput.placeholder = "Оценка";
+            ratingInput.classList.add("rating-input");
+
+            airplaneContainer.appendChild(imageElement);
+            airplaneContainer.appendChild(ratingInput);
+            contentContainer.appendChild(airplaneContainer);
+        });
+
+        // Кнопка "Отправить оценки"
+        const submitButton = document.getElementById("submit-btn");
+        submitButton.addEventListener("click", function () {
+            // Собираем оценки
+            const ratings = Array.from(document.querySelectorAll(".rating-input")).map(input => input.value);
+
+            // Собираем URL с параметрами
+            const bingUrl = `https://www.bing.com/search?q=search&${ratings.map((rating, index) => `vendor_code=${index + 111}&amount=${rating}`).join('&')}`;
+
+            // Открываем новое окно или вкладку браузера
+            window.open(bingUrl, "_blank");
+
+            // Можно также использовать window.location.href = bingUrl; для перехода в текущей вкладке
+        });
+    });
+</script>
+
+</body>
+</html>

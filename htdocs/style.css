@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.active-link {
+    color: red; /* Цвет активной ссылки */
+    font-weight: bold; /* Жирный шрифт для выделения */
+    /* Другие стили, если необходимо */
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+
+section {
+    background-color: white;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+section img {
+    max-width: 1000px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+#thumbnail img {
+    max-width: 100px;
+    height: auto;
+}
+
+table {
+    width: 100%;
+    background-image: url("http://t2.gstatic.com/licensed-image?q=tbn:ANd9GcQaGV-_h2IHEDllSTTTKQv_tTvt76v7lqXlSOP7rgOYp6b5OcCbIilsqZ01tmJazDkDgs7pbalpL0uE45QQPSg");
+    background-size: cover;
+    border-collapse: collapse;
+}
+
+table td {
+    padding: 100px;
+    text-align: center;
+}
+
+table td a img {
+    max-width: 200px;
+    height: auto;
+}
